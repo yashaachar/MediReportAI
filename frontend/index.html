@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediReport AI — Intelligent Blood Report Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css?v=3" />
+</head>
+<body>
+
+  <!-- ───────────────────── NAV ───────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="14" fill="url(#logoGrad)"/>
+            <path d="M10 16h3l2-5 3 10 2-7 2 2h3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span>MediReport <strong>AI</strong></span>
+      </div>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#upload-section" class="nav-cta">Analyze Report</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ───────────────────── HERO ───────────────────── -->
+  <section class="hero" id="hero">
+    <!-- 3-D mesh / orb background -->
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Medical Intelligence
+      </div>
+      <h1 class="hero-title">
+        Understand Your<br/>
+        <span class="gradient-text">Blood Report</span><br/>
+        In Seconds
+      </h1>
+      <p class="hero-sub">
+        Upload any blood report PDF. Our AI reads, understands, and predicts your risk for
+        Diabetes, Heart Disease and Liver Disease — with plain-language explanations.
+      </p>
+      <div class="hero-actions">
+        <a href="#upload-section" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload Report
+        </a>
+        <a href="#how-it-works" class="btn-ghost">See how it works</a>
+      </div>
+
+      <!-- floating stat pills -->
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span class="stat-val">3</span>
+          <span class="stat-lbl">Diseases Screened</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-val">OCR</span>
+          <span class="stat-lbl">Auto Extraction</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-val">PDF</span>
+          <span class="stat-lbl">Report Download</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-D floating card -->
+    <div class="hero-card-wrapper">
+      <div class="hero-card" id="heroCard">
+        <div class="hc-header">
+          <div class="hc-dot red"></div>
+          <div class="hc-dot yellow"></div>
+          <div class="hc-dot green"></div>
+          <span class="hc-title">Sample Analysis</span>
+        </div>
+        <div class="hc-body">
+          <div class="hc-row">
+            <div class="hc-label">Hemoglobin</div>
+            <div class="hc-bar-wrap"><div class="hc-bar" style="width:38%;background:#ef4444;"></div></div>
+            <div class="hc-tag low">Low</div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-label">LDL Cholesterol</div>
+            <div class="hc-bar-wrap"><div class="hc-bar" style="width:82%;background:#f59e0b;"></div></div>
+            <div class="hc-tag high">High</div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-label">Blood Glucose</div>
+            <div class="hc-bar-wrap"><div class="hc-bar" style="width:67%;background:#f59e0b;"></div></div>
+            <div class="hc-tag mid">Mid</div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-label">Creatinine</div>
+            <div class="hc-bar-wrap"><div class="hc-bar" style="width:52%;background:#10b981;"></div></div>
+            <div class="hc-tag ok">Normal</div>
+          </div>
+          <div class="hc-divider"></div>
+          <div class="hc-risk-row">
+            <div class="hc-risk-item red-risk">
+              <div class="risk-circle red-ring">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <span>Diabetes<br/><b>High Risk</b></span>
+            </div>
+            <div class="hc-risk-item green-risk">
+              <div class="risk-circle green-ring">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <span>Heart<br/><b>Low Risk</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── HOW IT WORKS ───────────────────── -->
+  <section class="how-section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-chip">Process</div>
+        <h2>From PDF to Insight<br/><span class="gradient-text">in Four Steps</span></h2>
+        <p>No manual data entry. No medical jargon. Just clear, actionable health intelligence.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card" data-step="1">
+          <div class="step-number">01</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="4" width="32" height="40" rx="4" fill="url(#sg1)"/><path d="M16 16h16M16 22h16M16 28h10" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="sg1" x1="8" y1="4" x2="40" y2="44"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs></svg>
+          </div>
+          <h3>Upload PDF</h3>
+          <p>Drop in any standard blood test report. We support scanned and digital PDFs.</p>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card" data-step="2">
+          <div class="step-number">02</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="url(#sg2)"/><path d="M16 24l5 5 11-10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="sg2" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs></svg>
+          </div>
+          <h3>OCR + Extraction</h3>
+          <p>Our vision pipeline reads every test value, unit, and reference range from your report.</p>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card" data-step="3">
+          <div class="step-number">03</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="8" fill="url(#sg3)"/><path d="M14 28l6-8 6 6 4-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="16" r="4" fill="white" fill-opacity=".25" stroke="white" stroke-width="2"/><defs><linearGradient id="sg3" x1="4" y1="4" x2="44" y2="44"><stop stop-color="#10b981"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs></svg>
+          </div>
+          <h3>AI Risk Prediction</h3>
+          <p>Machine-learning models trained on clinical data assess your risk across three conditions.</p>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card" data-step="4">
+          <div class="step-number">04</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M8 40V28l8-8h16l8 8v12a4 4 0 01-4 4H12a4 4 0 01-4-4z" fill="url(#sg4)"/><path d="M16 20v-8a4 4 0 014-4h8a4 4 0 014 4v8" stroke="white" stroke-width="2.5" stroke-linecap="round"/><rect x="20" y="28" width="8" height="8" rx="2" fill="white" fill-opacity=".35"/><defs><linearGradient id="sg4" x1="8" y1="20" x2="40" y2="44"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs></svg>
+          </div>
+          <h3>Download Report</h3>
+          <p>Get a beautifully formatted PDF summary in English or Hindi to share with your doctor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── FEATURES ───────────────────── -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-head light">
+        <div class="section-chip light">Capabilities</div>
+        <h2>Everything your report<br/><span class="gradient-text-light">needs to tell you</span></h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feat-card glass">
+          <div class="feat-icon cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h4>Smart OCR Reading</h4>
+          <p>Tesseract-powered extraction that understands medical table formats, units and ranges.</p>
+        </div>
+        <div class="feat-card glass">
+          <div class="feat-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>3 Disease Models</h4>
+          <p>Separate ML models for Diabetes, Cardiovascular and Liver disease — each trained independently.</p>
+        </div>
+        <div class="feat-card glass">
+          <div class="feat-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h4>SHAP Explanations</h4>
+          <p>Every prediction comes with the top contributing factors from your report, ranked by impact.</p>
+        </div>
+        <div class="feat-card glass">
+          <div class="feat-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Bilingual PDF Report</h4>
+          <p>Download a structured summary in English or Hindi with your results and key findings.</p>
+        </div>
+        <div class="feat-card glass">
+          <div class="feat-icon pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h4>Risk Colour Coding</h4>
+          <p>Instant visual green / yellow / red signals so you know where to focus at a glance.</p>
+        </div>
+        <div class="feat-card glass">
+          <div class="feat-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Privacy First</h4>
+          <p>Files are processed in-memory and deleted immediately. Nothing is stored permanently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── UPLOAD SECTION ───────────────────── -->
+  <section class="upload-section" id="upload-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-chip">Analyze</div>
+        <h2>Upload Your Report</h2>
+        <p>Supports standard blood panel PDFs. Scanned documents work too.</p>
+      </div>
+
+      <!-- STEP 1: Upload -->
+      <div id="uploadZone" class="upload-zone" role="button" tabindex="0" aria-label="Upload PDF">
+        <div class="upload-inner">
+          <div class="upload-anim">
+            <div class="upload-ring ring-1"></div>
+            <div class="upload-ring ring-2"></div>
+            <div class="upload-ring ring-3"></div>
+            <div class="upload-icon-wrap">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#uGrad)" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/><defs><linearGradient id="uGrad" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs></svg>
+            </div>
+          </div>
+          <h3 class="upload-title">Drag & drop your report here</h3>
+          <p class="upload-sub">or click to browse — PDF only, max 20 MB</p>
+          <input type="file" id="fileInput" accept=".pdf" hidden />
+          <button class="btn-primary upload-btn" onclick="document.getElementById('fileInput').click()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Choose PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- File selected state -->
+      <div id="fileSelected" class="file-selected hidden">
+        <div class="file-card">
+          <div class="file-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="file-info">
+            <div class="file-name" id="fileName">report.pdf</div>
+            <div class="file-size" id="fileSize">—</div>
+          </div>
+          <button class="btn-remove" id="removeFile" aria-label="Remove file">✕</button>
+        </div>
+        <div class="lang-row">
+          <span class="lang-label">Report language:</span>
+          <label class="lang-opt active" id="langEn">
+            <input type="radio" name="lang" value="en" checked hidden /> English
+          </label>
+          <label class="lang-opt" id="langHi">
+            <input type="radio" name="lang" value="hi" hidden /> हिंदी
+          </label>
+        </div>
+        <button class="btn-primary analyze-btn" id="analyzeBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Analyze Report
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── PROCESSING OVERLAY ───────────────────── -->
+  <div id="processingOverlay" class="processing-overlay hidden">
+    <div class="processing-box">
+      <div class="proc-orb"></div>
+      <h3 id="procTitle">Analyzing Your Report</h3>
+      <p id="procSub">Running OCR and extracting test values…</p>
+      <div class="proc-steps">
+        <div class="proc-step active" id="pStep1">
+          <div class="proc-dot"></div><span>Reading PDF</span>
+        </div>
+        <div class="proc-step" id="pStep2">
+          <div class="proc-dot"></div><span>Extracting values</span>
+        </div>
+        <div class="proc-step" id="pStep3">
+          <div class="proc-dot"></div><span>Running AI models</span>
+        </div>
+        <div class="proc-step" id="pStep4">
+          <div class="proc-dot"></div><span>Building summary</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────────────── RESULTS SECTION ───────────────────── -->
+  <section class="results-section hidden" id="resultsSection">
+    <div class="container">
+
+      <!-- Results header -->
+      <div class="results-head">
+        <div class="results-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Analysis Complete
+        </div>
+        <h2>Your Health Report</h2>
+        <button class="btn-ghost-sm" id="newUploadBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Analyze Another
+        </button>
+      </div>
+
+      <!-- Patient strip -->
+      <div class="patient-strip" id="patientStrip">
+        <div class="patient-pill" id="patName"></div>
+        <div class="patient-pill" id="patAge"></div>
+        <div class="patient-pill" id="patGender"></div>
+      </div>
+
+      <!-- Risk cards grid -->
+      <div class="risk-grid" id="riskGrid"></div>
+
+      <!-- Extracted tests accordion -->
+      <details class="raw-details" id="rawDetails">
+        <summary>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          View extracted test values
+        </summary>
+        <div class="raw-table-wrap">
+          <table class="raw-table" id="rawTable">
+            <thead><tr><th>Test</th><th>Value</th></tr></thead>
+            <tbody id="rawTableBody"></tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- Download strip -->
+      <div class="download-strip" id="downloadStrip">
+        <div class="dl-info">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#dlGrad)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><defs><linearGradient id="dlGrad" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs></svg>
+          <div>
+            <strong>Download your report</strong>
+            <span>Get a formatted PDF summary to share with your doctor</span>
+          </div>
+        </div>
+        <div class="dl-actions">
+          <button class="btn-dl en-btn" id="dlEnBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            English PDF
+          </button>
+          <button class="btn-dl hi-btn" id="dlHiBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            हिंदी PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="disclaimer">
+        ⚠️ MediReport AI is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="nav-logo">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="url(#fLogo)"/><path d="M10 16h3l2-5 3 10 2-7 2 2h3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="fLogo" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs></svg>
+          </div>
+          <span>MediReport <strong>AI</strong></span>
+        </div>
+        <p class="footer-copy">© 2026 MediReport AI. For informational use only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Error toast -->
+  <div class="toast hidden" id="errorToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="toastMsg">Something went wrong.</span>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

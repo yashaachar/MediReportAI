@@ -1,0 +1,59 @@
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ─── Virtual Environment ───
+venv/
+env/
+.venv/
+.env/
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ─── OS ───
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ─── Bundled Binaries (too large for GitHub) ───
+tesseract-ocr/
+poppler/
+
+# ─── Runtime / Temp Files ───
+temp/
+src/temp/
+src/data/
+data/ocr_output/
+data/nlp_output/
+data/pipeline_output/
+data/reports/
+
+# ─── Sample PDFs (large files) ───
+data/sample_report.pdf
+data/sample_report_2.pdf
+data/sample_report_3.pdf
+data/images.pdf
+
+# ─── Generated Docs ───
+MediReportAI_Documentation.docx
+MediReportAI_Presentation_Guide.docx
+create_presentation_guide.py
+generate_docs.py
+
+# ─── Misc ───
+*.log
+*.bak
+.agents/
